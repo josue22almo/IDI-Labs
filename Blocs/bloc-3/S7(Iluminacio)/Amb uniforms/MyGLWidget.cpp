@@ -22,7 +22,8 @@ void MyGLWidget::initializeGL ()
 {
   // Cal inicialitzar l'ús de les funcions d'OpenGL
   initializeOpenGLFunctions();  
-
+  colFocus = glm::vec3(0.8,0.8,0.8);
+  posFocus = glm::vec3(1, 1, 1);
   glClearColor(0.5, 0.7, 1.0, 1.0); // defineix color de fons (d'esborrat)
   glEnable(GL_DEPTH_TEST);
   carregaShaders();
@@ -254,13 +255,18 @@ void MyGLWidget::carregaShaders()
   matspecLoc = glGetAttribLocation (program->programId(), "matspec");
   // Obtenim identificador per a l'atribut “matshin” del vertex shader
   matshinLoc = glGetAttribLocation (program->programId(), "matshin");
-  
+  // Obtenim identificador per a l'atribut “colFocus” del vertex shader
+  colFocusLoc = glGetAttribLocation (program->programId(), "colFocus");
+  // Obtenim identificador per a l'atribut “colFocus” del vertex shader
+  posFocusLoc = glGetAttribLocation (program->programId(), "posFocus");
   
   
   // Demanem identificadors per als uniforms del vertex shader
   transLoc = glGetUniformLocation (program->programId(), "TG");
   projLoc = glGetUniformLocation (program->programId(), "proj");
   viewLoc = glGetUniformLocation (program->programId(), "view");
+  
+  carregaLlum();
 }
 
 void MyGLWidget::modelTransformPatricio ()
@@ -270,6 +276,12 @@ void MyGLWidget::modelTransformPatricio ()
   TG = glm::translate(TG, -centrePatr);
   
   glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
+}
+
+void MyGLWidget::carregaLlum()
+{
+    glUniform3fv(posFocusLoc, 1, &posFocus[0]);
+    glUniform3fv(colFocusLoc, 1, &colFocus[0]);
 }
 
 void MyGLWidget::modelTransformTerra ()

@@ -42,7 +42,7 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     void modelTransformTerra ();
     void modelTransformPatricio ();
     void calculaCapsaModel ();
-
+    void carregaLlum();
     // VAO i VBO names
     GLuint VAO_Patr, VBO_PatrPos, VBO_PatrNorm, VBO_PatrMatamb, VBO_PatrMatdiff, VBO_PatrMatspec, VBO_PatrMatshin;
     GLuint VAO_Terra, VBO_TerraPos, VBO_TerraNorm, VBO_TerraMatamb, VBO_TerraMatdiff, VBO_TerraMatspec, VBO_TerraMatshin;
@@ -62,8 +62,9 @@ class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
     float radiEsc;
     
     //característiques focus de llum
-    glm::vec3 colFocus;
-    GLuint colFocusLoc;
+    glm::vec3 colFocus, posFocus;
+    GLuint colFocusLoc, posFocusLoc;
+    
     typedef  enum {NONE, ROTATE} InteractiveAction;
     InteractiveAction DoingInteractive;
     int xClick, yClick;
