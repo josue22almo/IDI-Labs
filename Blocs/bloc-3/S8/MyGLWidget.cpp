@@ -1,7 +1,7 @@
 #include "MyGLWidget.h"
 
 #include <iostream>
-using namespace std;
+
 MyGLWidget::MyGLWidget (QWidget* parent) : QOpenGLWidget(parent)
 {
   setFocusPolicy(Qt::ClickFocus);  // per rebre events de teclat
@@ -21,11 +21,11 @@ MyGLWidget::~MyGLWidget ()
 void MyGLWidget::initializeGL ()
 {
   // Cal inicialitzar l'ús de les funcions d'OpenGL
-  initializeOpenGLFunctions(); 
+  initializeOpenGLFunctions();  
+  posFocus = glm::vec3(1,1,1);
+  colFocus = glm::vec3(0.8,0.8,0.8);
   glClearColor(0.5, 0.7, 1.0, 1.0); // defineix color de fons (d'esborrat)
   glEnable(GL_DEPTH_TEST);
-  colFocus = glm::vec3(0.8,0.8,0.8);
-  posFocus = glm::vec3(1, 1, 1);
   carregaShaders();
   createBuffers();
   projectTransform ();
@@ -255,7 +255,7 @@ void MyGLWidget::carregaShaders()
   matspecLoc = glGetAttribLocation (program->programId(), "matspec");
   // Obtenim identificador per a l'atribut “matshin” del vertex shader
   matshinLoc = glGetAttribLocation (program->programId(), "matshin");
-
+  
   
   
   // Demanem identificadors per als uniforms del vertex shader
@@ -263,8 +263,14 @@ void MyGLWidget::carregaShaders()
   projLoc = glGetUniformLocation (program->programId(), "proj");
   viewLoc = glGetUniformLocation (program->programId(), "view");
   colFocusLoc = glGetUniformLocation (program->programId(), "colFocus");
-  posFocusLoc = glGetUniformLocation (program->programId(), "posFocus");  
-  carregaLlum();
+  posFocusLoc = glGetUniformLocation (program->programId(), "posFocus");
+  carregarFocus();
+}
+
+void MyGLWidget::carregarFocus()
+{
+  glUniform3fv(colFocusLoc,1,&colFocus[0]);
+  glUniform3fv(posFocusLoc,1,&posFocus[0]);
 }
 
 void MyGLWidget::modelTransformPatricio ()
@@ -274,12 +280,6 @@ void MyGLWidget::modelTransformPatricio ()
   TG = glm::translate(TG, -centrePatr);
   
   glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
-}
-
-void MyGLWidget::carregaLlum()
-{ 
-  glUniform3fv(posFocusLoc, 1, &posFocus[0]);
-  glUniform3fv(colFocusLoc, 1, &colFocus[0]);
 }
 
 void MyGLWidget::modelTransformTerra ()
@@ -341,16 +341,6 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event)
     case Qt::Key_O: { // canvia òptica entre perspectiva i axonomètrica
       perspectiva = !perspectiva;
       projectTransform ();
-      break;
-    }
-    case Qt::Key_K:{
-      posFocus[0] -= 1;
-      carregaLlum();
-      break;
-    }
-    case Qt::Key_L:{
-      posFocus[0] += 1;
-      carregaLlum();
       break;
     }
     default: event->ignore(); break;

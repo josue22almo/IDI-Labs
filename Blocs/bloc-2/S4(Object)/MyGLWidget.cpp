@@ -20,7 +20,7 @@ void MyGLWidget::initializeGL ()
   // Cal inicialitzar l'ús de les funcions d'OpenGL
   initializeOpenGLFunctions();  
   glEnable (GL_DEPTH_TEST);
-  m.load ("/home2/users/alumnes/1193805/dades/Tercer/Q1/IDI/models/HomerProves.obj");
+  m.load ("/home2/users/alumnes/1193805/dades/Q1/IDI/models/HomerProves.obj");
   glClearColor(0.5, 0.7, 1.0, 1.0); // defineix color de fons (d'esborrat)
   carregaShaders();
   createBuffers();
@@ -109,45 +109,7 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event)
 }
 
 void MyGLWidget::createBuffers () 
-{
-  // Dades de la caseta
-  // Dos VBOs, un amb posició i l'altre amb color
-//   glm::vec3 posicio[5] = {
-// 	glm::vec3(-0.5, -1.0, -0.5),
-// 	glm::vec3( 0.5, -1.0, -0.5),
-// 	glm::vec3(-0.5,  0.0, -0.5),
-// 	glm::vec3( 0.5,  0.0, -0.5),
-// 	glm::vec3( 0.0,  0.6, -0.5)
-//   }; 
-//   glm::vec3 color[5] = {
-// 	glm::vec3(1,0,0),
-// 	glm::vec3(0,1,0),
-// 	glm::vec3(0,0,1),
-// 	glm::vec3(1,0,0),
-// 	glm::vec3(0,1,0)
-//   };
-// 
-//   // Creació del Vertex Array Object per pintar
-//   glGenVertexArrays(1, &VAO_Casa);
-//   glBindVertexArray(VAO_Casa);
-// 
-//   glGenBuffers(1, &VBO_CasaPos);
-//   glBindBuffer(GL_ARRAY_BUFFER, VBO_CasaPos);
-//   glBufferData(GL_ARRAY_BUFFER, sizeof(posicio), posicio, GL_STATIC_DRAW);
-// 
-//   // Activem l'atribut vertexLoc
-//    glVertexAttribPointer(vertexLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
-//    glEnableVertexAttribArray(vertexLoc);
-// 
-//   glGenBuffers(1, &VBO_CasaCol);
-//   glBindBuffer(GL_ARRAY_BUFFER, VBO_CasaCol);
-//   glBufferData(GL_ARRAY_BUFFER, sizeof(color), color, GL_STATIC_DRAW);
-// 
-//   // Activem l'atribut colorLoc
-//   glVertexAttribPointer(colorLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
-//   glEnableVertexAttribArray(colorLoc);
-
-  
+{ 
   
   //Inicialitzem VAO i VBO de l'objecte i el VBO  del color de l'objecte
   glGenVertexArrays(1, &VAO_Obj);

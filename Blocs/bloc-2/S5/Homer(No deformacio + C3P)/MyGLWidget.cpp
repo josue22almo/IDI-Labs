@@ -21,7 +21,7 @@ void MyGLWidget::initializeGL ()
   // Cal inicialitzar l'ús de les funcions d'OpenGL
   initializeOpenGLFunctions();  
   glEnable (GL_DEPTH_TEST);
-  m.load ("/home2/users/alumnes/1193805/dades/Tercer/Q1/IDI/models/HomerProves.obj");
+  m.load ("/home2/users/alumnes/1193805/dades/Q1/IDI/models/HomerProves.obj");
   glClearColor(0.5, 0.7, 1.0, 1.0); // defineix color de fons (d'esborrat)
   carregaShaders();
   createBuffers();

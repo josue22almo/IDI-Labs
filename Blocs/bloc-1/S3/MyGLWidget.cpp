@@ -31,7 +31,7 @@ void MyGLWidget::initializeGL ()
   scl_y = 0.5;
   glUniform1f (scl_yLoc, scl_y);
 
-  keyPress = 0;
+  keyPress = 1;
   glUniform1f (keyLoc, keyPress);
   
   mousePress = 0;

@@ -6,7 +6,7 @@ using namespace std;
 MyGLWidget::MyGLWidget (QWidget* parent) : QOpenGLWidget(parent)
 {
   setFocusPolicy(Qt::ClickFocus);  // per rebre events de teclat
-  m.load ("/home2/users/alumnes/1193805/dades/Tercer/Q1/IDI/models/Patricio.obj");
+  m.load ("/home2/users/alumnes/1193805/dades/Q1/IDI/models/Patricio.obj");
   scale = 1.0f;
   rotate = 0.0f;
   alpha_ini = (float)M_PI/4.0f;
@@ -62,26 +62,6 @@ void MyGLWidget::resizeGL (int w, int h)
     FOV = 2.0 * alpha;
   }
   glViewport(0, 0, w, h);
-}
-
-void MyGLWidget::keyPressEvent(QKeyEvent* event) 
-{
-  switch (event->key()) {
-    makeCurrent();
-    case Qt::Key_S: { // escalar a més gran
-      scale += 0.05;
-      break;
-    }
-    case Qt::Key_D: { // escalar a més petit
-      scale -= 0.05;
-      break;
-    }
-    case Qt::Key_R: {//gir 45 graus eix Y
-      rotate += (float)M_PI/4.0;
-    }
-    default: event->ignore(); break;
-  }
-  update();
 }
 
 void MyGLWidget::createBuffers () 

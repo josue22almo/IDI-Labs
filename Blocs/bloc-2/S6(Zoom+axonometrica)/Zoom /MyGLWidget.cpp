@@ -6,7 +6,7 @@ using namespace std;
 MyGLWidget::MyGLWidget (QWidget* parent) : QOpenGLWidget(parent)
 {
   setFocusPolicy(Qt::ClickFocus);  // per rebre events de teclat
-  m.load ("/home2/users/alumnes/1193805/dades/Tercer/Q1/IDI/models/Patricio.obj");
+  m.load ("/home2/users/alumnes/1193805/dades/Q1/IDI/models/Patricio.obj");
   scale = 1.0f;
   rotate = 0.0f;
   alpha_ini = (float)M_PI/4.0f;
